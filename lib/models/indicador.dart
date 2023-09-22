@@ -1,8 +1,8 @@
 class Indicador {
-  String bicho;
-  String descricao;
-  double meta;
-  String icone;
+  final String bicho;
+  final String descricao;
+  final double meta;
+  final String icone;
 
   Indicador({
     required this.bicho,
@@ -10,11 +10,9 @@ class Indicador {
     required this.meta, 
     required this.icone
   });
+
   String get nomeDoBicho => bicho;
-
   String get descricaoDoIndicador => descricao;
-
   double get metaDoIndicador => meta;
-
   String get iconeDoIndicador => icone;
 }

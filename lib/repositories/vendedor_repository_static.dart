@@ -1,10 +1,10 @@
 import 'package:my_app/models/vendedor.dart';
 
-class VendedorRepository{
-  static List<Vendedor> tabela =[
+class VendedorRepositoryStatic{
+  static List<Vendedor> vendedores =[
   Vendedor(
-    nome: 'Wagner',
-    sobrenome: 'Cordeiro Gomes da Silva',
+    nome: 'João',
+    sobrenome: 'da Silva',
     matricula: 17142
     ),
   Vendedor(

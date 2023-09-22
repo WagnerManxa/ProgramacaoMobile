@@ -39,14 +39,14 @@ class ExcelenciaVendedor{
       icone: 'assets/images/hipopotamo.jpg'
       ),
     Indicador(
-      bicho: 'Jaguar',
-      descricao: 'Plano Controle Bônus: +10 pontos para cada plano controle vendido, limitado a +100 pontos.', 
+      bicho: 'Jaguar Controle',
+      descricao: 'Bônus +10 pontos para cada plano controle vendido, limitado a +100 pontos.', 
       meta: 10.00, 
       icone: 'assets/images/jaguar.jpg'
       ),
     Indicador(
-      bicho: 'Jaguar',
-      descricao: 'Chip c/ Recarga Bônus: +25 pontos para coloaborador que vender o mínimo 5 Chips com recarga.',  
+      bicho: 'Jaguar Chip',
+      descricao: 'Bônus +25 pontos para coloaborador que vender o mínimo 5 Chips com recarga.',  
       meta: 5.00, 
       icone: 'assets/images/jaguar.jpg'
       ),                                    

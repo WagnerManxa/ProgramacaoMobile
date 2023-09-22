@@ -1,227 +1,159 @@
+// ignore_for_file: use_key_in_widget_constructors, prefer_const_constructors, avoid_unnecessary_containers
+import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
-import 'package:my_app/configs/app_settings.dart';
-import 'package:my_app/detalhes_indicador_page.dart';
+import 'package:my_app/pages/detalhes_indicador_page.dart';
+import 'package:my_app/pages/lancar_dias.dart';
 import 'package:my_app/repositories/excelencia_vendedor.dart';
-import 'models/indicador.dart';
+import 'package:my_app/repositories/vendedor_repository_static.dart';
+import 'package:provider/provider.dart';
+import 'app_state.dart';
 
-
-
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await HiveConfig.initHive();
-
-
+void main() {
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp();
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      title: 'My App',
-      home: MyHomePage(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => AppState()),
+      ],
+      child: MaterialApp(
+        home: MyHomePage(),
+      ),
     );
   }
 }
 
-
 class MyHomePage extends StatelessWidget {
-  const MyHomePage({super.key});
-  
-  get indicador => null;
+  const MyHomePage();
 
-@override
+//formatar dinheiro
+  String formatCurrency(double value) {
+    final currencyFormat = NumberFormat.currency(locale: 'pt_BR', symbol: 'R\$');
+    return currencyFormat.format(value);
+  }
+
+  List<Widget> buildIndicatorWidgets(BuildContext context) {
+    final indicatorWidgets = <Widget>[];
+
+    for (final indicador in ExcelenciaVendedor.excelencia) {
+      indicatorWidgets.add(
+        CustomContainer(
+          title: indicador.bicho,
+          subtitle: 'Realizado: ${formatCurrency(Provider.of<AppState>(context).valoresRealizados[indicador.bicho] ?? 0.0)}\nProjeção: ${formatCurrency(calcularProjecao(Provider.of<AppState>(context), indicador.bicho))}',
+          onTap: () {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => DetalheIndicador(
+                  indicador: indicador,
+                  realizado: '00.00',
+                ),
+              ),
+            );
+          },
+        ),
+      );
+    }
+    return indicatorWidgets;
+  }
+
+  double calcularProjecao(AppState appState, String indicador) {
+    final double valorRealizado = appState.valoresRealizados[indicador] ?? 0.0;
+    final int diasTrabalhados = appState.diasTrabalhados;
+    final int diasUteis = appState.diasUteis;
+
+    final double projecao = (valorRealizado / diasTrabalhados) * diasUteis;
+    return projecao;
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const CustomAppBar(),
-      body: SingleChildScrollView(
-        child: Column(
-          children: <Widget>[
-            CustomContainer(
-              title: ExcelenciaVendedor.excelencia[0].bicho,
-              subtitle: 'Realizado: [var]\nProjeção: [(var/d_v)*d_u]',
-              progressValue: 0.15,
-              onTap: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => DetalheIndicador(
-                    indicador: Indicador(  // Substitua isso pela instância do Indicador desejado
-                      bicho: ExcelenciaVendedor.excelencia[0].bicho,
-                      descricao: ExcelenciaVendedor.excelencia[0].descricao, 
-                      meta: ExcelenciaVendedor.excelencia[0].meta, 
-                      icone: ExcelenciaVendedor.excelencia[0].icone,
-                      ), 
-                      realizado: '00.00',
-                      )
-                ));
-              },
+      body: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('assets/images/xicoria.png'),
+            fit: BoxFit.fill,
+            colorFilter: ColorFilter.mode(
+              Colors.black.withOpacity(0.2), // Defina a cor de fundo com transparência
+              BlendMode.dstATop, // Modo de mesclagem para aplicar transparência
             ),
-            CustomContainer(
-              title: ExcelenciaVendedor.excelencia[1].bicho,
-              subtitle: 'Realizado: [var]\nProjeção: [(var/d_v)*d_u]',
-              progressValue: 0.15,
-              onTap: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => DetalheIndicador(
-                    indicador: Indicador(  // Substitua isso pela instância do Indicador desejado
-                      bicho: ExcelenciaVendedor.excelencia[1].bicho,
-                      descricao: ExcelenciaVendedor.excelencia[1].descricao, 
-                      meta: ExcelenciaVendedor.excelencia[1].meta, 
-                      icone: ExcelenciaVendedor.excelencia[1].icone,
-                    ), realizado: '00.00',)
-                ));
-              },
+          ),
+        ),
+        child: Container(
+          child: SingleChildScrollView(
+            child: Column(
+              children: <Widget>[
+                ...buildIndicatorWidgets(context),
+              ],
             ),
-            CustomContainer(
-              title: ExcelenciaVendedor.excelencia[2].bicho,
-              subtitle: 'Realizado: [var]\nProjeção: [(var/d_v)*d_u]',
-              progressValue: 0.15,
-              onTap: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => DetalheIndicador(
-                    indicador: Indicador(  // Substitua isso pela instância do Indicador desejado
-                      bicho: ExcelenciaVendedor.excelencia[2].bicho,
-                      descricao: ExcelenciaVendedor.excelencia[2].descricao, 
-                      meta: ExcelenciaVendedor.excelencia[2].meta, 
-                      icone: ExcelenciaVendedor.excelencia[2].icone,
-                    ), realizado: '00.00',)
-                ));
-              },
-            ),
-            CustomContainer(
-              title: ExcelenciaVendedor.excelencia[3].bicho,
-              subtitle: 'Realizado: [var]\nProjeção: [(var/d_v)*d_u]',
-              progressValue: 0.15,
-              onTap: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => DetalheIndicador(
-                    indicador: Indicador(  // Substitua isso pela instância do Indicador desejado
-                      bicho: ExcelenciaVendedor.excelencia[3].bicho,
-                      descricao: ExcelenciaVendedor.excelencia[3].descricao, 
-                      meta: ExcelenciaVendedor.excelencia[3].meta, 
-                      icone: ExcelenciaVendedor.excelencia[3].icone,
-                    ), realizado: '00.00',)
-                ));
-              },
-            ),
-            CustomContainer(
-              title: ExcelenciaVendedor.excelencia[4].bicho,
-              subtitle: 'Realizado: [var]\nProjeção: [(var/d_v)*d_u]',
-              progressValue: 0.15,
-              onTap: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => DetalheIndicador(
-                    indicador: Indicador(  // Substitua isso pela instância do Indicador desejado
-                      bicho: ExcelenciaVendedor.excelencia[4].bicho,
-                      descricao: ExcelenciaVendedor.excelencia[4].descricao, 
-                      meta: ExcelenciaVendedor.excelencia[4].meta, 
-                      icone: ExcelenciaVendedor.excelencia[4].icone,
-                    ), realizado: '00.00',)
-                ));
-              },
-            ),
-            CustomContainer(
-              title: ExcelenciaVendedor.excelencia[5].bicho,
-              subtitle: 'Realizado: [var]\nProjeção: [(var/d_v)*d_u]',
-              progressValue: 0.15,
-              onTap: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => DetalheIndicador(
-                    indicador: Indicador(  // Substitua isso pela instância do Indicador desejado
-                      bicho: ExcelenciaVendedor.excelencia[5].bicho,
-                      descricao: ExcelenciaVendedor.excelencia[5].descricao, 
-                      meta: ExcelenciaVendedor.excelencia[5].meta, 
-                      icone: ExcelenciaVendedor.excelencia[5].icone,
-                    ), realizado: '00.00',)
-                ));
-              },
-            ),
-            CustomContainer(
-              title: ExcelenciaVendedor.excelencia[6].bicho,
-              subtitle: 'Realizado: [var]\nProjeção: [(var/d_v)*d_u]',
-              progressValue: 0.15,
-              onTap: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => DetalheIndicador(
-                    indicador: Indicador(  // Substitua isso pela instância do Indicador desejado
-                      bicho: ExcelenciaVendedor.excelencia[6].bicho,
-                      descricao: ExcelenciaVendedor.excelencia[6].descricao, 
-                      meta: ExcelenciaVendedor.excelencia[6].meta, 
-                      icone: ExcelenciaVendedor.excelencia[6].icone,
-                    ), realizado: '00.00',)
-                ));
-              },
-            ),
-            CustomContainer(
-              
-              title: ExcelenciaVendedor.excelencia[7].bicho,
-              subtitle: 'Realizado: [var]\nProjeção: [(var/d_v)*d_u]',
-              progressValue: 0.15,
-              onTap: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => DetalheIndicador(
-                    indicador: Indicador(  // Substitua isso pela instância do Indicador desejado
-                      bicho: ExcelenciaVendedor.excelencia[7].bicho,
-                      descricao: ExcelenciaVendedor.excelencia[7].descricao, 
-                      meta: ExcelenciaVendedor.excelencia[7].meta, 
-                      icone: ExcelenciaVendedor.excelencia[7].icone,
-                    ), realizado: '00.00',)
-                ));
-              },
-            ),
-          ],
+          ),
         ),
       ),
-     
     );
   }
 }
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const CustomAppBar({super.key});
+  const CustomAppBar({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 
   @override
   Widget build(BuildContext context) {
+    final nomeVendedor = VendedorRepositoryStatic.vendedores[0].nome;
+
     return AppBar(
-        title: const Row(
+      title: Row(
         children: [
-          Padding(
+          const Padding(
             padding: EdgeInsets.all(8.0),
             child: CircleAvatar(
               backgroundImage: AssetImage('assets/images/profile_image.jpeg'),
+              maxRadius: 25,
             ),
           ),
-          Text('Olá João'),
-           Spacer(),
-            Padding(
-             padding: EdgeInsets.all(8.0),
-            child: CircularProgressIndicator(
-              value: 0.40,
-              backgroundColor: Colors.yellow,
-            ),
+          Text(
+            'Olá $nomeVendedor',
+            style: TextStyle(fontSize: 20),
           ),
         ],
       ),
+      actions: [
+        IconButton(
+          icon: const Icon(Icons.calendar_today),
+          tooltip: 'Lançar dias úteis e trabalhados.',
+          onPressed: () {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => LancarDias(),
+              ),
+            );
+          },
+        ),
+      ],
+      backgroundColor: Color.fromARGB(255, 148, 11, 11),
     );
   }
 }
 
-
 class CustomContainer extends StatelessWidget {
   final String title;
   final String subtitle;
-  final double progressValue;
   final VoidCallback onTap;
 
   const CustomContainer({
     Key? key,
     required this.title,
     required this.subtitle,
-    required this.progressValue,
     required this.onTap,
   }) : super(key: key);
 
@@ -230,8 +162,8 @@ class CustomContainer extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Container(
-        margin: const EdgeInsets.all(16.0),
-        padding: const EdgeInsets.all(16.0),
+        margin: EdgeInsets.all(16.0),
+        padding: EdgeInsets.all(16.0),
         decoration: BoxDecoration(
           border: Border.all(color: Colors.black),
           borderRadius: BorderRadius.circular(10),
@@ -242,48 +174,9 @@ class CustomContainer extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(title, style: const TextStyle(fontSize: 18)),
-                Text(subtitle, style: const TextStyle(fontSize: 14)),
+                Text(title, style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                Text(subtitle, style: TextStyle(fontSize: 16)),
               ],
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: CircularProgressIndicator(
-                value: progressValue,
-                backgroundColor: Colors.red,
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class ContainerScreen extends StatelessWidget {
-  final String title;
-  final String imageAsset;
-
-  const ContainerScreen({
-    Key? key,
-    required this.title,
-    required this.imageAsset,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Image.asset(
-              imageAsset,
-              width: 200.0,
-              height: 200.0,
             ),
           ],
         ),
