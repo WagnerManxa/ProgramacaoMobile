@@ -31,7 +31,12 @@
 
 ### Instalação ###
 
-
+#Passo 1: Baixar o arquivo do GitHub
+#Passo 2: Descompactar o arquivo baixado
+#Passo 3: Abra o VSCode
+#Passo 4: No VSCode abra o arquivo descompactado e entre no arquivo my_app
+#Passo 5: No arquivo my_app clieque em teste2 e clique em selecionar pasta
+#Passo 6: Pronto o arquivo estara aberto no VSCode, em seguida alguns erros que podem ocorrer
 
 ### Erros que podem ocorrer na instalação do arquivo ###
 
