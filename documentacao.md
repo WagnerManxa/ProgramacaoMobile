@@ -1,1 +1,61 @@
+# ProgramacaoMobile
+#Desenvolvido por Wagner Silva e Erick Paiva
 
+### Utilização ###
+
+# Ao acessar a homepage, precione o ícone de calendário (no canto superior direito) para informar a quantidade de dias úteis do mês de trabalho e informar os dias já trabalhados.
+
+# Precione o indicador na tela inicial que deseja saber mais;
+
+# Precione o ícone de prancheta (no canto inforior direito) para informar o quanto foi produzido;
+
+
+### Peculiaridades ###
+
+# O aplicativo contará com um tela de login uma vez que implementado banco de dados, atualmente o usuário está se baseando no repositório estatico com uma lista de vendedores;
+
+# Atualmente conta-se com 7 indicadores que juntos formaram a excelencia em vendas. Cada indicador terá uma pontuação de acordo com o percentual atingido da meta. Posteriormente mais indicadores serão implementados;
+
+# Será implementado um sistema de pontuação e a mesma será mostrada em um CircleProgressBar dentro do Container_Modificado;
+
+# A pontuação do vendedor será informada ao usuário e servirá de base para premiação com a seguinte regra:
+1000 pontos = A1000;
+800 á 999 = A prêmio = 40%;
+600 á 799 = B prêmio = 25%;
+400 á 599 = C prêmio = 15%; 
+200 á 399 = D sem prêmio;
+>200 = E sem prêmio;
+
+# As informações lançadas estão sendo mantidas em uma classe ChageNotifier para posterior integração com banco de dados;
+
+
+### Instalação ###
+
+#Passo 1: Baixar o arquivo do GitHub
+#Passo 2: Descompactar o arquivo baixado
+#Passo 3: Abra o VSCode
+#Passo 4: No VSCode abra o arquivo descompactado e entre no arquivo my_app
+#Passo 5: No arquivo my_app clieque em teste2 e clique em selecionar pasta
+#Passo 6: Pronto o arquivo estara aberto no VSCode, em seguida alguns erros que podem ocorrer
+
+### Erros que podem ocorrer na instalação do arquivo ###
+
+# * Erro nos imports: ao baixar o código do Git, esse erro pode ocorrer devido ao caminho que o import seguia originalmente, bastando apenas corrigi-lo.
+
+# * Outro erro no import. Esse erro ocorreu quando eu baixei o arquivo que havia enviado no Git para testá-lo.
+# Para corrigi-lo, bastou apenas dar "Add 'intl' to dependencies".
+
+# * Erro no pubspec.yaml, precisamente no SDK. Esse erro ocorreu devido ao meu SDK ser de algumas versões anteriores à que o Wagner está utilizando.
+# Para arrumá-lo, atualize o SDK ou modifique para a versão anterior. No pubspec.yaml também houve erro na versão do provider, bastando alterá-la.
+
+# * Erro na pasta 'android' do projeto: "Unsupported Gradle project". Para arrumá-lo, foi apenas necessário dar um novo "flutter create -t app" e arrastar a pasta assets,
+# lib e pubspec.yaml para a nova pasta criada, corrigir os imports, e o projeto voltou a funcionar de maneira adequada.
+
+###Compilação###
+
+#Para executar o código e testar a funcionalidade da aplicação
+#deve utilizar o emuldador do Android Studio ou nessa primeira versão também pode se utilizar o Google Chrome ou Microsoft Edge, mas a recomendação é utilizar o emulador.
+#A versão do Android do emulador utilizada pelo Erick foi do Android 11.0 Google Play "Pixel 7 Pro API 30"
+#A versão do emulador utilizada pelo Wagner foi Android 13 Tsunami "Últimos testes feitos no Chrome" 
+#Em ambos a aplicação rodou mas precisou ser feito algumas alterações no pubspec.yaml e no Apk, como relatado nos "Erros que podem ocorrer na instalação do arquivo"
+#----------------------------------------------------------------------------------------------------------------------------
