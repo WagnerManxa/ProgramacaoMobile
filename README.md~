@@ -1,18 +1,17 @@
 # ProgramacaoMobile
 #Desenvolvido por Wagner Silva e Erick Paiva
 
+# Alguns erros que podem ocorrer na instalação do arquivo:
 
-#Alguns erros que podem ocorrer na instalação do arquivo:
+# * Erro nos imports: ao baixar o código do Git, esse erro pode ocorrer devido ao caminho que o import seguia originalmente, bastando apenas corrigi-lo.
 
-#*Erro nos import: ao baixar o codigo do git esse erro pode ocorrer devido ao caminho que o import seguia originalmente, bastando apenas corrigi-lo
+# * Outro erro no import. Esse erro ocorreu quando eu baixei o arquivo que havia enviado no Git para testá-lo.
+# Para corrigi-lo, bastou apenas dar "Add 'intl' to dependencies".
 
-#*Outro erro no import, esse erro ocorreu quando eu baixei o arquivo que havia enviado no git para testa-lo
-#para corrigi-lo bastou apenas dar "Add 'intl' to dependencies".
+# * Erro no pubspec.yaml, precisamente no SDK. Esse erro ocorreu devido ao meu SDK ser de algumas versões anteriores à que o Wagner está utilizando.
+# Para arrumá-lo, atualize o SDK ou modifique para a versão anterior. No pubspec.yaml também houve erro na versão do provider, bastando alterá-la.
 
-#*Erro no pubspec.yaml precisamente no sdk esse erro ocorreu devido ao meu skd ser de algumas versões anteriores ao do que o Wagner esta utilizando, 
-#parra arruma-lo atualizar o sdk ou modificar para a versão anterior, no pbspec.yaml tambem ouve erro na versão do provider bastando altera-la.
-
-#*Erro na pasta android do projeto "Unsuppot Gradle project" para arruma-lo foi apenas necessário dar um novo "flutter create -t app" e arrastar a pasta assets,
-#lib e pubspec.yaml e para nova pasta criada, corrigir os imports e o projeto voltou a funcionar de maneira adequada.
+# * Erro na pasta 'android' do projeto: "Unsupported Gradle project". Para arrumá-lo, foi apenas necessário dar um novo "flutter create -t app" e arrastar a pasta assets,
+# lib e pubspec.yaml para a nova pasta criada, corrigir os imports, e o projeto voltou a funcionar de maneira adequada.
 
 #----------------------------------------------------------------------------------------------------------------------------
