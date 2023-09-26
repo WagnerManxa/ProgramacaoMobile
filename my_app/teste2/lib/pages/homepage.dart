@@ -1,11 +1,14 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_app/app_state.dart';
-import 'package:flutter_app/custom.dart';
+// ignore_for_file: use_key_in_widget_constructors, prefer_const_constructors, avoid_unnecessary_containers
+
 import 'package:flutter_app/pages/detalhes_indicador_page.dart';
+import 'package:flutter_app/providers/app_state.dart';
 import 'package:flutter_app/repositories/excelencia_vendedor.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_app/widgets/appbar_modificada.dart';
+import 'package:flutter_app/widgets/container_modificado.dart';
 import 'package:intl/intl.dart';
+import 'package:flutter/material.dart';
+
+import 'package:provider/provider.dart';
 
 class MyHomePage extends StatelessWidget {
   const MyHomePage();
@@ -21,13 +24,13 @@ class MyHomePage extends StatelessWidget {
 
     for (final indicador in ExcelenciaVendedor.excelencia) {
       indicatorWidgets.add(
-        CustomContainer(
+        ContainerModificado(
           title: indicador.bicho,
           subtitle: 'Realizado: ${formatCurrency(Provider.of<AppState>(context).valoresRealizados[indicador.bicho] ?? 0.0)}\nProjeção: ${formatCurrency(calcularProjecao(Provider.of<AppState>(context), indicador.bicho))}',
           onTap: () {
             Navigator.of(context).push(
               MaterialPageRoute(
-                builder: (context) => DetalheIndicador(
+                builder: (context) => DetalhesIndicador(
                   indicador: indicador,
                   realizado: '00.00',
                 ),
@@ -52,14 +55,14 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBar(),
+      appBar: const AppBarModificada(),
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('images/xicoria.png'),
+            image: AssetImage('assets/images/xicoria.png'),
             fit: BoxFit.fill,
             colorFilter: ColorFilter.mode(
-              Colors.black.withOpacity(0.2), // Defina a cor de fundo com transparência
+              Colors.black.withOpacity(0.2), // Definir a cor de fundo com transparência
               BlendMode.dstATop, // Modo de mesclagem para aplicar transparência
             ),
           ),

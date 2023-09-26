@@ -1,0 +1,11 @@
+{
+    "configurations": [
+        {
+            "name": "Flutter (lib\\main.dart)",
+            "type": "dart",
+            "request": "launch",
+            "cwd": "my_app\\teste2",
+            "program": "lib\\main.dart"
+        }
+    ]
+}

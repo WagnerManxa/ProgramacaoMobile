@@ -1,10 +1,10 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'package:flutter_app/app_state.dart';
-import 'package:flutter_app/models/indicador.dart';
-import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/models/indicador.dart';
+import 'package:flutter_app/providers/app_state.dart';
 
+import 'package:provider/provider.dart';
 
 class LancarIndicadores extends StatefulWidget {
   final Indicador indicador;
@@ -17,7 +17,7 @@ class LancarIndicadores extends StatefulWidget {
 
 class _LancarIndicadoresState extends State<LancarIndicadores> {
   final _formKey = GlobalKey<FormState>();
-  double? venda;
+  double? venda; // Variável para armazenar o valor de venda
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +26,7 @@ class _LancarIndicadoresState extends State<LancarIndicadores> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.indicador.bicho),
-        backgroundColor: Color.fromARGB(255, 148, 11, 11), // Cor de fundo personalizada da AppBar
+        backgroundColor: Color.fromARGB(255, 148, 11, 11),
       ),
       body: Container(
         decoration: BoxDecoration(
@@ -57,8 +57,8 @@ class _LancarIndicadoresState extends State<LancarIndicadores> {
                 SizedBox(height: 16),
 
                 TextFormField(
-                  keyboardType: const TextInputType.numberWithOptions(decimal: true),
-                  decoration: const InputDecoration(labelText: "Valor Realizado"),
+                  keyboardType: TextInputType.numberWithOptions(decimal: true),
+                  decoration: InputDecoration(labelText: "Valor Realizado"),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return "Por favor, insira um valor válido.";
@@ -72,7 +72,7 @@ class _LancarIndicadoresState extends State<LancarIndicadores> {
                     }
                   },
                   onSaved: (value) {
-                    venda = double.parse(value!);
+                    venda = double.parse(value!); // Salva o valor na variável
                   },
                 ),
                 SizedBox(height: 16),
@@ -81,8 +81,9 @@ class _LancarIndicadoresState extends State<LancarIndicadores> {
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
                       _formKey.currentState!.save();
-                      appState.atualizarValorRealizado(widget.indicador.bicho, venda ?? 0.0);
-                      Navigator.pop(context, venda?.toStringAsFixed(2));
+                      final novoValor = venda ?? 0.0; // Obtém o valor da variável
+                      appState.atualizarValorRealizado(widget.indicador.bicho, novoValor);
+                      Navigator.pop(context, novoValor.toStringAsFixed(2)); // Retorna o valor para a tela anterior
                     }
                   },
                   child: const Text("Salvar"),

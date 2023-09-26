@@ -1,6 +1,5 @@
-
-
 import 'package:flutter_app/models/vendedor.dart';
+
 
 class VendedorRepositoryStatic{
   static List<Vendedor> vendedores =[

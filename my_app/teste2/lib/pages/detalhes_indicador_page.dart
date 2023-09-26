@@ -1,21 +1,23 @@
 // ignore_for_file: prefer_const_constructors, must_be_immutable
 import 'package:flutter_app/models/indicador.dart';
 import 'package:flutter_app/pages/lancar_indicador_page.dart';
+import 'package:flutter_app/providers/app_state.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 
+import 'package:provider/provider.dart';
 
-class DetalheIndicador extends StatefulWidget {
+class DetalhesIndicador extends StatefulWidget {
   final Indicador indicador;
   String? realizado;
 
-  DetalheIndicador({super.key, required this.indicador, this.realizado});
+  DetalhesIndicador({super.key, required this.indicador, this.realizado});
 
   @override
-  State<DetalheIndicador> createState() => _DetalheIndicadorState();
+  State<DetalhesIndicador> createState() => _DetalhesIndicadorState();
 }
 
-class _DetalheIndicadorState extends State<DetalheIndicador> {
+class _DetalhesIndicadorState extends State<DetalhesIndicador> {
   void atualizarRealizado(String? novoValor) {
     setState(() {
       widget.realizado = novoValor;
@@ -27,7 +29,7 @@ class _DetalheIndicadorState extends State<DetalheIndicador> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.indicador.bicho),
-        backgroundColor: Color.fromARGB(255, 148, 11, 11), // Cor de fundo personalizada
+        backgroundColor: Color.fromARGB(255, 148, 11, 11), 
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -90,7 +92,7 @@ class _DetalheIndicadorState extends State<DetalheIndicador> {
                   ),
                 ),
                 Text(
-                  'R\$ ${widget.realizado != null ? widget.realizado!.replaceAll('.', ',') : "00,00"}',
+                  'R\$ ${NumberFormat.currency(locale: 'pt_BR', symbol: '', decimalDigits: 2).format(Provider.of<AppState>(context).valoresRealizados[widget.indicador.bicho] ?? 0.0)}',
                   style: TextStyle(
                     fontSize: 16,
                     color: const Color.fromARGB(255, 2, 48, 85),

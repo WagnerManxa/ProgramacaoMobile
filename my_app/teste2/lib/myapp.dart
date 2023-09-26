@@ -1,9 +1,9 @@
 
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/app_state.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_app/pages/homepage.dart';
+import 'package:flutter_app/providers/app_state.dart';
 import 'package:provider/provider.dart';
 
 class MyApp extends StatelessWidget {
@@ -16,6 +16,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => AppState()),
       ],
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         home: MyHomePage(),
       ),
     );
