@@ -88,13 +88,13 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   # flutter:
-  fonts:
-    - family: Montserrat
-      fonts:
-        - asset: assets/fonts/Montserrat-Regular.ttf
-        - asset: assets/fonts/Montserrat-Bold.ttf
-        - asset: assets/fonts/Montserrat-Italic.ttf
-        - asset: assets/fonts/Montserrat-BoldItalic.ttf
+  #fonts:
+   # - family: Montserrat
+    #  fonts:
+     #   - asset: assets/fonts/Montserrat-Regular.ttf
+      #  - asset: assets/fonts/Montserrat-Bold.ttf
+      #  - asset: assets/fonts/Montserrat-Italic.ttf
+      #  - asset: assets/fonts/Montserrat-BoldItalic.ttf
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
