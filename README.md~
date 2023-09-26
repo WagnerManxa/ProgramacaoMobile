@@ -1,7 +1,39 @@
 # ProgramacaoMobile
 #Desenvolvido por Wagner Silva e Erick Paiva
 
-# Alguns erros que podem ocorrer na instalação do arquivo:
+### Utilização ###
+
+# Ao acessar a homepage, precione o ícone de calendário (no canto superior direito) para informar a quantidade de dias úteis do mês de trabalho e informar os dias já trabalhados.
+
+# Precione o indicador na tela inicial que deseja saber mais;
+
+# Precione o ícone de prancheta (no canto inforior direito) para informar o quanto foi produzido;
+
+
+### Peculiaridades ###
+
+# O aplicativo contará com um tela de login uma vez que implementado banco de dados, atualmente o usuário está se baseando no repositório estatico com uma lista de vendedores;
+
+# Atualmente conta-se com 7 indicadores que juntos formaram a excelencia em vendas. Cada indicador terá uma pontuação de acordo com o percentual atingido da meta. Posteriormente mais indicadores serão implementados;
+
+# Será implementado um sistema de pontuação e a mesma será mostrada em um CircleProgressBar dentro do Container_Modificado;
+
+# A pontuação do vendedor será informada ao usuário e servirá de base para premiação com a seguinte regra:
+1000 pontos = A1000;
+800 á 999 = A prêmio = 40%;
+600 á 799 = B prêmio = 25%;
+400 á 599 = C prêmio = 15%; 
+200 á 399 = D sem prêmio;
+>200 = E sem prêmio;
+
+# As informações lançadas estão sendo mantidas em uma classe ChageNotifier para posterior integração com banco de dados;
+
+
+### Instalação ###
+
+
+
+### Erros que podem ocorrer na instalação do arquivo ###
 
 # * Erro nos imports: ao baixar o código do Git, esse erro pode ocorrer devido ao caminho que o import seguia originalmente, bastando apenas corrigi-lo.
 
