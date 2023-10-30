@@ -58,4 +58,9 @@ A new Flutter project.
 # lib e pubspec.yaml para a nova pasta criada, corrigir os imports, e o projeto voltou a funcionar de maneira adequada.
 
 #----------------------------------------------------------------------------------------------------------------------------
+# instale o Firebase
+# use flutterfire cofigure e flutter pub add firebase_core
+# Ao baixar o arquivo que foi upado para o git, há um bug no addvendedorpage ao clicar no botão o aplicativo trava, não faço ideia pq isso ocorra, visto q no arquivo original
+# ele não trava e exibe os vendedores a serem adicionados, importante relatar isso na hora da apresentação.
+
 
