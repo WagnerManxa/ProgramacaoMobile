@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "530515545021",
+    "project_id": "mobilebancodedados",
+    "storage_bucket": "mobilebancodedados.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:530515545021:android:d7d4e3e7729c93d79d20d4",
+        "android_client_info": {
+          "package_name": "com.example.my_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCb3xiYEByoq8laYKc-AVs_fLI0Vv_cs74"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:530515545021:android:08e667d5b0084d7c9d20d4",
+        "android_client_info": {
+          "package_name": "com.example.teste2"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCb3xiYEByoq8laYKc-AVs_fLI0Vv_cs74"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
