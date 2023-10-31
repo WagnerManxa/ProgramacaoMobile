@@ -34,6 +34,11 @@ A new Flutter project.
 
 # As informações lançadas estão sendo mantidas em uma classe ChageNotifier para posterior integração com banco de dados;
 
+# Está sendo salvo as informações de relizado no appstate e posteriormente enviado ao banco de dados. 
+
+# BUG! Os indicadores estão sendo os mesmo para qualquer usuário que faça o login. 
+
+# Os indicadores estão sendo salvos no banco de dados porém a leitura dos mesmo não foi implementada.
 
 ### Instalação ###
 
