@@ -9,7 +9,8 @@ import 'package:provider/provider.dart';
 class LancarIndicadores extends StatefulWidget {
   final Indicador indicador;
 
-  const LancarIndicadores({Key? key, required this.indicador}) : super(key: key);
+  const LancarIndicadores({Key? key, required this.indicador})
+      : super(key: key);
 
   @override
   State<LancarIndicadores> createState() => _LancarIndicadoresState();
@@ -25,7 +26,12 @@ class _LancarIndicadoresState extends State<LancarIndicadores> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.indicador.bicho),
+        title: Text(
+          widget.indicador.bicho,
+          style: TextStyle(
+            color: Colors.white,
+          ),
+        ),
         backgroundColor: Color.fromARGB(255, 148, 11, 11),
       ),
       body: Container(
@@ -55,7 +61,6 @@ class _LancarIndicadoresState extends State<LancarIndicadores> {
                 ),
                 Text(widget.indicador.descricao),
                 SizedBox(height: 16),
-
                 TextFormField(
                   keyboardType: TextInputType.numberWithOptions(decimal: true),
                   decoration: InputDecoration(labelText: "Valor Realizado"),
@@ -76,14 +81,18 @@ class _LancarIndicadoresState extends State<LancarIndicadores> {
                   },
                 ),
                 SizedBox(height: 16),
-
                 ElevatedButton(
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
                       _formKey.currentState!.save();
-                      final novoValor = venda ?? 0.0; // Obtém o valor da variável
-                      appState.atualizarValorRealizado(widget.indicador.bicho, novoValor);
-                      Navigator.pop(context, novoValor.toStringAsFixed(2)); // Retorna o valor para a tela anterior
+                      final novoValor =
+                          venda ?? 0.0; // Obtém o valor da variável
+                      appState.atualizarValorRealizado(
+                          widget.indicador.bicho, novoValor);
+                      Navigator.pop(
+                          context,
+                          novoValor.toStringAsFixed(
+                              2)); // Retorna o valor para a tela anterior
                     }
                   },
                   child: const Text("Salvar"),

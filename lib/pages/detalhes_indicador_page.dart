@@ -35,7 +35,7 @@ class _DetalhesIndicadorState extends State<DetalhesIndicador> {
       'matricula': matricula,
       'nome': nome,
       'sobrenome': sobrenome,
-      ...valoresRealizados, 
+      ...valoresRealizados,
     };
 
     await documentReference.set(data, SetOptions(merge: true));
@@ -45,7 +45,12 @@ class _DetalhesIndicadorState extends State<DetalhesIndicador> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.indicador.bicho),
+        title: Text(
+          widget.indicador.bicho,
+          style: TextStyle(
+            color: Colors.white,
+          ),
+        ),
         backgroundColor: Color.fromARGB(255, 148, 11, 11),
       ),
       body: SingleChildScrollView(
@@ -137,8 +142,8 @@ class _DetalhesIndicadorState extends State<DetalhesIndicador> {
                   .collection('users')
                   .doc(uid)
                   .get();
-              final matricula = userDoc['matricula'] as String? ??
-                  "Matrícula padrão";
+              final matricula =
+                  userDoc['matricula'] as String? ?? "Matrícula padrão";
               final nome = userDoc['nome'] as String? ?? "Nome do Funcionário";
               final sobrenome =
                   userDoc['sobrenome'] as String? ?? "Sobrenome do Funcionário";

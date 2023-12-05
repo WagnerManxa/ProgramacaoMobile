@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 
 class AppState with ChangeNotifier {
+  
   Map<String, double> valoresRealizados = {};
   int diasTrabalhados = 0;
   int diasUteis = 0; 
@@ -19,4 +20,6 @@ class AppState with ChangeNotifier {
     diasUteis = dias;
     notifyListeners();
   }
+
+  
 }

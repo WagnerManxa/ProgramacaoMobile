@@ -20,8 +20,8 @@ class LoginPageState extends State<LoginPage> {
   final email = TextEditingController();
   final matricola = TextEditingController();
   final senha = TextEditingController();
-  final nomeController = TextEditingController(); // Campo para o nome
-  final sobrenomeController = TextEditingController(); // Campo para o sobrenome
+  final nomeController = TextEditingController(); 
+  final sobrenomeController = TextEditingController(); 
 
   bool isLogin = true;
   late String titulo;
@@ -53,17 +53,15 @@ class LoginPageState extends State<LoginPage> {
     try {
       await context.read<AuthService>().login(email.text, senha.text);
       final user = await context.read<AuthService>().usuario;
-
-      // Forçar a recuperação dos dados do Firestore diretamente do servidor
       final isApproved =
           await context.read<AuthService>().isUserApproved(user!);
 
       if (isApproved) {
-        // Usuário aprovado, permita o acesso
+       
         Navigator.of(context).pushReplacement(
             MaterialPageRoute(builder: (context) => MyHomePage()));
       } else {
-        // Usuário não aprovado, exiba uma mensagem de erro
+        
         ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text('Seu cadastro ainda não foi aprovado.')));
       }
@@ -79,23 +77,19 @@ class LoginPageState extends State<LoginPage> {
             email.text,
             senha.text,
             matricola.text,
-            nomeController.text, // Passa o nome
-            sobrenomeController.text, // Passa o sobrenome
-          );
-
-      // Após o registro bem-sucedido, você pode verificar se o usuário está aprovado aqui
+            nomeController.text, 
+            sobrenomeController.text, 
+          );  
       final user = await context.read<AuthService>().usuario;
-
-      // Verifique se o usuário está aprovado
       final isApproved =
           await context.read<AuthService>().isUserApproved(user!);
 
       if (isApproved) {
-        // Usuário aprovado, permita o acesso
+        
         Navigator.of(context).pushReplacement(
             MaterialPageRoute(builder: (context) => MyHomePage()));
       } else {
-        // Usuário não aprovado, exiba uma mensagem de erro
+        
         ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text('Seu cadastro ainda não foi aprovado.')));
       }
@@ -141,14 +135,14 @@ class LoginPageState extends State<LoginPage> {
                     },
                   ),
                 ),
-                if (!isLogin) // Mostrar campos de nome e sobrenome apenas no registro
+                if (!isLogin) 
                   Padding(
                     padding: EdgeInsets.all(24),
                     child: TextFormField(
                       controller: nomeController,
                       decoration: InputDecoration(
                         border: OutlineInputBorder(),
-                        labelText: 'Nome', // Etiqueta para nome
+                        labelText: 'Nome', 
                       ),
                       validator: (value) {
                         if (value!.isEmpty) {
@@ -158,14 +152,14 @@ class LoginPageState extends State<LoginPage> {
                       },
                     ),
                   ),
-                if (!isLogin) // Mostrar campos de nome e sobrenome apenas no registro
+                if (!isLogin) 
                   Padding(
                     padding: EdgeInsets.all(24),
                     child: TextFormField(
                       controller: sobrenomeController,
                       decoration: InputDecoration(
                         border: OutlineInputBorder(),
-                        labelText: 'Sobrenome', // Etiqueta para sobrenome
+                        labelText: 'Sobrenome', 
                       ),
                       validator: (value) {
                         if (value!.isEmpty) {
@@ -206,17 +200,17 @@ class LoginPageState extends State<LoginPage> {
                       }
                     },
                     style: ElevatedButton.styleFrom(
-                      primary: Color.fromARGB(255, 148, 11, 11), // Cor do botão
+                      primary: Color.fromARGB(255, 148, 11, 11), 
                     ),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Icon(Icons.check),
+                        Icon(Icons.check,  color: Colors.white),
                         Padding(
                           padding: EdgeInsets.all(16.0),
                           child: Text(
                             actionButton,
-                            style: TextStyle(fontSize: 20),
+                            style: TextStyle(fontSize: 20,  color: Colors.white),
                           ),
                         ),
                       ],
@@ -225,7 +219,8 @@ class LoginPageState extends State<LoginPage> {
                 ),
                 TextButton(
                     onPressed: () => setFormAction(!isLogin),
-                    child: Text(toggleButton))
+                    child: Text(toggleButton)),
+                    
               ],
             ),
           ),

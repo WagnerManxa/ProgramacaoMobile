@@ -1,12 +1,18 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
 class ListaUsuariosPendentesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Usuários Pendentes'),
+        title: Text(
+          'Usuários Pendentes',
+          style: TextStyle(
+            color: Colors.white,
+          ),
+        ),
         backgroundColor: Color.fromARGB(255, 148, 11, 11),
       ),
       body: FutureBuilder<QuerySnapshot>(
@@ -36,7 +42,8 @@ class ListaUsuariosPendentesPage extends StatelessWidget {
                   children: <Widget>[
                     ListTile(
                       title: Text(nomeCompleto),
-                      subtitle: Text('Email: $userEmail\nAprovado: ${isApproved ? 'Sim' : 'Não'}'),
+                      subtitle: Text(
+                          'Email: $userEmail\nAprovado: ${isApproved ? 'Sim' : 'Não'}'),
                       trailing: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
@@ -44,14 +51,16 @@ class ListaUsuariosPendentesPage extends StatelessWidget {
                             icon: Icon(Icons.check),
                             onPressed: () {
                               if (!isApproved) {
-                                showMatriculaDialog(context, usuario.reference, userEmail, true);
+                                showMatriculaDialog(context, usuario.reference,
+                                    userEmail, true);
                               }
                             },
                           ),
                           IconButton(
                             icon: Icon(Icons.delete),
                             onPressed: () {
-                              showMatriculaDialog(context, usuario.reference, userEmail, false);
+                              showMatriculaDialog(
+                                  context, usuario.reference, userEmail, false);
                             },
                           ),
                         ],
@@ -86,7 +95,11 @@ class ListaUsuariosPendentesPage extends StatelessWidget {
     userReference.delete();
   }
 
-  Future<void> showMatriculaDialog(BuildContext context, DocumentReference userReference, String userEmail, bool isApproval) async {
+  Future<void> showMatriculaDialog(
+      BuildContext context,
+      DocumentReference userReference,
+      String userEmail,
+      bool isApproval) async {
     String matricula = '';
 
     return showDialog(
@@ -114,7 +127,9 @@ class ListaUsuariosPendentesPage extends StatelessWidget {
                 if (isApproval) {
                   approveUser(userReference, matricula);
                   ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text('Usuário aprovado: $userEmail, Matrícula: $matricula')),
+                    SnackBar(
+                        content: Text(
+                            'Usuário aprovado: $userEmail, Matrícula: $matricula')),
                   );
                 } else {
                   removeUser(userReference);

@@ -1,3 +1,5 @@
+
+
 import 'package:flutter/material.dart';
 import 'package:flutter_app/pages/detalhes_indicador_page.dart';
 import 'package:flutter_app/providers/app_state.dart';
@@ -81,7 +83,7 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const AppBarModificada(),
+      appBar: AppBarModificada(),
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(

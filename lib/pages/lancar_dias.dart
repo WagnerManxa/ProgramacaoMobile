@@ -3,6 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/providers/app_state.dart';
 import 'package:provider/provider.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 
 class LancarDias extends StatefulWidget {
   @override
@@ -13,13 +15,41 @@ class _LancarDiasState extends State<LancarDias> {
   final _formKey = GlobalKey<FormState>();
   TextEditingController diasTrabalhadosController = TextEditingController();
   TextEditingController diasUteisController = TextEditingController();
+  List<Map<String, dynamic>> feriados = [];
 
   @override
   void initState() {
     super.initState();
-    final appState = Provider.of<AppState>(context, listen: false);
-    diasTrabalhadosController.text = appState.diasTrabalhados.toString();
-    diasUteisController.text = appState.diasUteis.toString();
+    _fetchHolidays();
+  }
+
+  Future<void> _fetchHolidays() async {
+    try {
+      final response = await http.get(
+          Uri.parse('https://date.nager.at/api/v2/publicholidays/2023/br'));
+
+      if (response.statusCode == 200) {
+        final List<dynamic> holidays = jsonDecode(response.body);
+        feriados = holidays
+            .map((holiday) => {
+                  'data': DateTime.parse(holiday['date']),
+                  'nome': holiday['name'],
+                })
+            .toList();
+        final DateTime now = DateTime.now();
+        feriados = feriados
+            .where((feriado) => feriado['data'].month == now.month)
+            .toList();
+
+        print('Feriados do mês: $feriados');
+        setState(() {});
+      } else {
+        print(
+            'Falha ao carregar feriados. Código de status: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Erro ao carregar feriados: $e');
+    }
   }
 
   @override
@@ -28,7 +58,12 @@ class _LancarDiasState extends State<LancarDias> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Informar Dias'),
+        title: Text(
+          'Informar Dias',
+          style: TextStyle(
+            color: Colors.white,
+          ),
+        ),
         backgroundColor: Color.fromARGB(255, 148, 11, 11),
       ),
       body: Padding(
@@ -79,7 +114,8 @@ class _LancarDiasState extends State<LancarDias> {
                     return "Por favor, insira um valor válido.";
                   } else {
                     final int diasTrabalhados = int.tryParse(value) ?? 0;
-                    final int diasUteis = int.tryParse(diasUteisController.text) ?? 0;
+                    final int diasUteis =
+                        int.tryParse(diasUteisController.text) ?? 0;
                     if (diasTrabalhados < 0 || diasTrabalhados > diasUteis) {
                       return "Valor deve estar entre 0 e os dias úteis informados.";
                     }
@@ -87,11 +123,11 @@ class _LancarDiasState extends State<LancarDias> {
                   }
                 },
                 onSaved: (value) {
-                  appState.atualizarDiasTrabalhados(int.tryParse(value ?? '0') ?? 0);
+                  appState.atualizarDiasTrabalhados(
+                      int.tryParse(value ?? '0') ?? 0);
                 },
               ),
               SizedBox(height: 16),
-
               ElevatedButton(
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
@@ -100,6 +136,29 @@ class _LancarDiasState extends State<LancarDias> {
                   }
                 },
                 child: Text("Salvar"),
+              ),
+              SizedBox(height: 16),
+              Text(
+                "Feriados do Mês:",
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: feriados.map((feriado) {
+                    return Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        "${feriado['data'].day}/${feriado['data'].month}/${feriado['data'].year} - ${feriado['nome']}",
+                        style: TextStyle(fontSize: 14),
+                      ),
+                    );
+                  }).toList(),
+                ),
               ),
             ],
           ),

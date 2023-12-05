@@ -42,9 +42,7 @@ class ContainerModificado extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(title,
-                    style:
-                        TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                Text(title, style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
                 SizedBox(height: 10),
                 Text(
                   subtitle,
@@ -59,7 +57,7 @@ class ContainerModificado extends StatelessWidget {
                   progress: progress,
                   radius: 40,
                   value: progress * 100,
-                  subtitle: 'Realizado',
+                  subtitle: ' ',
                   backgroundColor: Colors.grey,
                   progressColor: progressColor,
                   valueColor: Colors.black,
@@ -69,7 +67,7 @@ class ContainerModificado extends StatelessWidget {
                   progress: projectionProgress,
                   radius: 40,
                   value: projectionProgress * 100,
-                  subtitle: 'Projeção',
+                  subtitle: ' ',
                   backgroundColor: Colors.grey,
                   progressColor: progressColor,
                   valueColor: Colors.black,
